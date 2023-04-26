@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: projet-si-database
+spec:
+  selector:
+    app: projet-si-database
+  ports:
+    - port: 3306
+  type: NodePort
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-projet-si-pv-claim
+  labels:
+    app: mysql-projet-si-pv-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projet-si-database
+spec:
+  selector:
+    matchLabels:
+      app: projet-si-database
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: projet-si-database
+    spec:
+      containers:
+        - name: projet-si-database
+          image: mysql:5.7
+          ports:
+            - containerPort: 3306
+              name: mysql
+          envFrom:
+            - configMapRef:
+                name: projet-si-database-env
+          volumeMounts:
+            - name: projet-si-mysql-persistent-storage
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: projet-si-mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: mysql-projet-si-pv-claim
