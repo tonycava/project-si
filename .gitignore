@@ -1,2 +1,7 @@
 *.env.yml
 .idea
+yarn.lock
+terraform.tfstate
+terraform.tfstate.backup
+.terraform.lock.hcl
+.terraform
