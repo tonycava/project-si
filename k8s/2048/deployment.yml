@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projet-si-2048
+  labels:
+    app: projet-si-2048
+spec:
+  selector:
+    matchLabels:
+      app: projet-si-2048
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: projet-si-2048
+    spec:
+      containers:
+        - name: 2048-container
+          image: blackicebird/2048
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: projet-si-2048
+spec:
+  selector:
+    app: projet-si-2048
+  type: LoadBalancer
+  ports:
+    - port: 80
+      protocol: TCP
