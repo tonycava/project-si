@@ -1,5 +1,0 @@
-apiVersion: v2
-name: firstchart
-description: A simple Helm chart for k8s
-type: application
-version: 0.0.1

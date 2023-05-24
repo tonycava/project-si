@@ -5,4 +5,4 @@ terraform.tfstate
 terraform.tfstate.backup
 .terraform
 *.pem
-variable.tf
+variables.example.tf
