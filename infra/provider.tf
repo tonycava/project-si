@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "eu-west-3"
+  region = var.aws_region
 }
 
 resource "aws_iam_role" "eks-iam-role" {
@@ -87,10 +87,6 @@ resource "aws_eks_node_group" "worker-node-group" {
     aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy,
     aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly,
   ]
-}
-
-resource "aws_route53_zone" "test" {
-  name = "tonycava.dev"
 }
 
 resource "aws_s3_bucket" "terraform-state-storage-s3" {
