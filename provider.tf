@@ -88,3 +88,14 @@ resource "aws_eks_node_group" "worker-node-group" {
     aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly,
   ]
 }
+
+resource "aws_s3_bucket" "backend_bucket" {
+    bucket = "tonycava-terraform-state"
+
+}
+
+resource "aws_s3_bucket_acl" "bucket-acl" {
+  bucket = aws_s3_bucket.backend_bucket.id
+
+  acl = "private"
+}
