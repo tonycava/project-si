@@ -1,0 +1,19 @@
+{
+  "name": "projet-si",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@aws-sdk/client-eks": "^3.338.0",
+    "axios": "^1.4.0"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "@types/node": "^20.2.3",
+    "tsc": "^2.0.4",
+    "typescript": "^5.0.4"
+  }
+}
