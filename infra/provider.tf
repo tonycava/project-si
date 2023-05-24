@@ -89,13 +89,16 @@ resource "aws_eks_node_group" "worker-node-group" {
   ]
 }
 
-resource "aws_s3_bucket" "backend_bucket" {
-    bucket = "tonycava-terraform-state"
-
+resource "aws_route53_zone" "test" {
+  name = "tonycava.dev"
 }
 
-resource "aws_s3_bucket_acl" "bucket-acl" {
-  bucket = aws_s3_bucket.backend_bucket.id
+resource "aws_s3_bucket" "terraform-state-storage-s3" {
+  bucket = "tonycava-backend-bucket-test-fdsw"
+}
 
-  acl = "private"
+resource "aws_s3_bucket_object" "file_upload" {
+  bucket = aws_s3_bucket.terraform-state-storage-s3.id
+  key    = "tf-state"
+  source = "${path.module}/terraform.tfstate"
 }
